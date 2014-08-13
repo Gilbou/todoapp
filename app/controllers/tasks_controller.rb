@@ -1,7 +1,7 @@
 class TasksController < ApplicationController
 
   def index
-    @tasks = Task.all
+    @tasks = Task.order(priority: :desc)
   end
 
   def show
@@ -13,9 +13,14 @@ class TasksController < ApplicationController
   end
 
   def create
-    Task.create(task_params)
-    flash[:notice] = "your task is created"
-    redirect_to tasks_path
+    task = Task.create(task_params)
+    if task.valid?
+      flash[:notice] = "your task is created"
+      redirect_to tasks_path
+    else
+      flash[:notice] = "your task is NOT created : #{task.errors.messages}"
+      redirect_to tasks_path
+    end
   end
 
   def edit

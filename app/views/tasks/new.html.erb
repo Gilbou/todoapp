@@ -1,17 +1,5 @@
 <h1>Add a todo</h1>
 
-<%= form_for(@task) do |f| %>
-  <%= f.label :name %>
-  <%= f.text_field :name %>
-
-  <%= f.label :priority %>
-  <%= f.select :priority, {'low' => 1, 'medium' => 2, 'hight' => 3 } %>
-
-  <%= f.label :due_date %>
-  <%= f.text_field :due_date %>
-
-
-  <%= f.submit %>
-<% end %>
+<%= render 'form' %>
 
 <%= link_to 'cancel', tasks_path %>
